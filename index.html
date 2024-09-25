@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energia Nuclear - Informações e Modelos 3D</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-item {
+            margin: 5px 15px;
+            position: relative;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-link i {
+            margin-right: 5px;
+        }
+
+        .nav-link:hover {
+            color: #4CAF50;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #2a2a2a;
+            min-width: 150px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+
+        .nav-item:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown li {
+            padding: 10px;
+        }
+
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .dropdown a:hover {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-item {
+                margin: 5px 0;
+            }
+
+            .dropdown {
+                position: static;
+                display: none;
+                width: 100%;
+            }
+
+            .nav-item:hover .dropdown {
+                display: block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-link {
+                font-size: 14px;
+            }
+        }
+        
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --accent-color: #e74c3c;
+            --background-color: #f0f8f0;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            margin-bottom: 2em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: var(--secondary-color);
+        }
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+        .simulation {
+            background-color: #e0f2e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        #reactor {
+            width: 300px;
+            height: 300px;
+            background-color: var(--secondary-color);
+            margin: 20px auto;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
+        }
+        .particle {
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+        }
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: var(--primary-color);
+        }
+        .icon {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .flex-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .flex-item {
+            flex-basis: 48%;
+        }
+        @media (max-width: 768px) {
+            .flex-item {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="#modelos3d" class="nav-link">
+                    <i class="fas fa-cube"></i>
+                    Modelos 3D
+                </a>
+                <ul class="dropdown">
+                    <li><a href="https://netheriosa.github.io/intro-usina/">Usina</a></li>
+                    <li><a href="https://netheriosa.github.io/intro/">Chernobyl</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="https://netheriosa.github.io/pag2/" class="nav-link">
+                    <i class="fas fa-radiation"></i>
+                    Chernobyl
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://netheriosa.github.io/pag3/" class="nav-link">
+                    <i class="fas fa-atom"></i>
+                    Energia Nuclear
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://netheriosa.github.io/pag4/" class="nav-link">
+                    <i class="fas fa-industry"></i>
+                    Usina
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2><i class="fas fa-atom icon"></i> O que é Energia Nuclear?</h2>
+            <p>A energia nuclear é a energia liberada a partir de reações no núcleo de átomos, mais especificamente pela fissão nuclear ou fusão nuclear. Essas duas formas de reação nuclear envolvem grandes quantidades de energia, e são usadas tanto para geração de eletricidade quanto em aplicações militares (como armas nucleares).</p>
+        </div>
+        
+        <div class="flex-container">
+            <div class="card flex-item">
+                <h2><i class="fas fa-cogs icon"></i> Fissão e Fusão</h2>
+                <p>Fissão nuclear:
+                        
+                    <ul>
+                        <li>A fissão ocorre quando o núcleo de um átomo pesado, como o urânio-235 ou o plutônio-239, é dividido em dois ou mais núcleos menores.</li>
+                        <li>Esse processo libera uma grande quantidade de energia, além de neutrons, que podem continuar o processo de fissão em uma reação em cadeia.</li>
+                        <li>É o princípio básico das usinas nucleares, onde a energia térmica gerada pela fissão aquece a água, criando vapor que aciona turbinas para gerar eletricidade.</li>
+                    </ul>
+ 
+                    Fusão nuclear:
+                    
+                    <ul>
+                        <li>
+                            A fusão envolve a combinação de núcleos leves, como o hidrogênio, para formar núcleos mais pesados, como o hélio.
+                            Esse é o processo que ocorre no interior das estrelas, como o Sol, e libera muito mais energia do que a fissão.</li>
+                        <li>No entanto, a fusão é mais difícil de ser controlada e reproduzida em escala industrial, embora haja pesquisas intensas para torná-la viável como uma fonte de energia limpa.</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="card flex-item">
+                <h2><i class="fas fa-plus-circle icon"></i> Vantagens e Desvantagens</h2>
+                <p>
+                    Vantagens:
+ 
+                    <ul>
+                        <li>Alta eficiência: Pequenas quantidades de combustível nuclear podem gerar grandes quantidades de energia.</li>
+                        <li>Baixa emissão de gases: Durante a operação, as usinas nucleares não emitem dióxido de carbono, ajudando a combater o efeito estufa.</li>
+                    </ul>
+ 
+                    Desvantagens:
+ 
+                    <ul>
+                        <li>Resíduos radioativos: O lixo nuclear produzido é altamente perigoso e deve ser armazenado com cuidado por milhares de anos.</li>
+                        <li>Risco de acidentes: Acidentes como o de Chernobyl (1986) e Fukushima (2011) mostraram os riscos envolvidos com o uso dessa tecnologia.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-exclamation-triangle icon"></i> O futuro da energia nuclear</h2>
+            <p>
+                <ul>
+                    <li>Reatores de próxima geração: Estão sendo desenvolvidos reatores de quarta geração, que serão mais seguros, eficientes e capazes de utilizar resíduos nucleares como combustível.</li>
+                    <li>Fusão nuclear: Se dominada, a fusão nuclear poderá fornecer uma fonte praticamente inesgotável de energia limpa e segura.</li>
+                </ul>
+            </p>
+        </div>
+        
+        <div class="simulation card">
+            <h2><i class="fas fa-play-circle icon"></i> Simulação Interativa de Reator Nuclear</h2>
+            <p>Experimente uma visualização simplificada da fissão nuclear! Clique no botão abaixo para iniciar a simulação e observe como as partículas (representando átomos) se movem e interagem dentro do núcleo de um reator nuclear.</p>
+            <div id="reactor"></div>
+            <button onclick="startSimulation()">Iniciar Simulação</button>
+        </div>
+    </div>
+ 
+    <script>
+        function startSimulation() {
+            const reactor = document.getElementById('reactor');
+            reactor.innerHTML = '';
+            
+            for (let i = 0; i < 30; i++) {
+                createParticle();
+            }
+        }
+ 
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const reactor = document.getElementById('reactor');
+            const maxX = reactor.clientWidth - 10;
+            const maxY = reactor.clientHeight - 10;
+            
+            particle.style.left = Math.random() * maxX + 'px';
+            particle.style.top = Math.random() * maxY + 'px';
+            
+            reactor.appendChild(particle);
+            
+            animateParticle(particle);
+        }
+ 
+        function animateParticle(particle) {
+            let x = parseInt(particle.style.left);
+            let y = parseInt(particle.style.top);
+            let vx = (Math.random() - 0.5) * 6;
+            let vy = (Math.random() - 0.5) * 6;
+            
+            function update() {
+                x += vx;
+                y += vy;
+                
+                const reactor = document.getElementById('reactor');
+                const maxX = reactor.clientWidth - 10;
+                const maxY = reactor.clientHeight - 10;
+                
+                if (x < 0 || x > maxX) {
+                    vx = -vx;
+                    particle.style.backgroundColor = getRandomColor();
+                }
+                if (y < 0 || y > maxY) {
+                    vy = -vy;
+                    particle.style.backgroundColor = getRandomColor();
+                }
+                
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                requestAnimationFrame(update);
+            }
+            
+            update();
+        }
+ 
+        function getRandomColor() {
+            const colors = ['#e74c3c', '#f1c40f', '#2ecc71', '#3498db', '#9b59b6'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animação para os links do menu
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.transition = 'transform 0.3s';
+                });
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Função para ajustar o layout em diferentes resoluções
+            function adjustLayout() {
+                const navbar = document.querySelector('.navbar');
+                const navLinks = document.querySelector('.nav-links');
+                if (window.innerWidth <= 768) {
+                    navbar.style.flexDirection = 'column';
+                    navLinks.style.flexDirection = 'column';
+                } else {
+                    navbar.style.flexDirection = 'row';
+                    navLinks.style.flexDirection = 'row';
+                }
+            }
+
+            // Chamar a função inicialmente e adicionar um listener para redimensionamento
+            adjustLayout();
+            window.addEventListener('resize', adjustLayout);
+        });
+    </script>
+</body>
+</html>
